@@ -1,6 +1,9 @@
-// This is a script for deploying your contracts. You can adapt it to deploy
-// yours, or create new ones.
+import { BigNumber, ContractFactory, Contract } from "ethers";
+import { run, ethers, network, artifacts } from "hardhat";
+
 async function main() {
+  await run("compile");
+
   // This is just a convenience check
   if (network.name === "hardhat") {
     console.warn(
@@ -10,7 +13,6 @@ async function main() {
     );
   }
 
-  // ethers is available in the global scope
   const [deployer] = await ethers.getSigners();
   console.log(
     "Deploying the contracts with the account:",
@@ -19,9 +21,9 @@ async function main() {
 
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
-  const Token = await ethers.getContractFactory("Token");
-  const initialSupply =  ethers.BigNumber.from("10").pow("18").mul("1000000000");
-  const token = await Token.deploy(initialSupply);
+  const Token:ContractFactory = await ethers.getContractFactory("Token");
+  const initialSupply:BigNumber =  ethers.BigNumber.from("10").pow("18").mul("1000000000");
+  const token:Contract = await Token.deploy(initialSupply);
   await token.deployed();
 
   console.log("Token address:", token.address);
@@ -30,7 +32,7 @@ async function main() {
   saveFrontendFiles(token);
 }
 
-function saveFrontendFiles(token) {
+function saveFrontendFiles(token:Contract) {
   const fs = require("fs");
   const contractsDir = __dirname + "/../frontend/src/contracts";
 

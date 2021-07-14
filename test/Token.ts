@@ -1,3 +1,7 @@
+import { ContractFactory, Contract } from "ethers";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/dist/src/signer-with-address";
+import { ethers } from "hardhat";
+
 // This is an exmaple test file. Hardhat will run every *.js file in `test/`,
 // so feel free to add new ones.
 
@@ -23,12 +27,12 @@ describe("Token contract", function () {
   // A common pattern is to declare some variables, and assign them in the
   // `before` and `beforeEach` callbacks.
 
-  let Token;
-  let hardhatToken;
-  let owner;
-  let addr1;
-  let addr2;
-  let addrs;
+  let Token:ContractFactory;
+  let hardhatToken:Contract;
+  let owner:SignerWithAddress;
+  let addr1:SignerWithAddress;
+  let addr2:SignerWithAddress;
+  let addrs:Array<SignerWithAddress>;
 
   // `beforeEach` will run before each test, re-deploying the contract every
   // time. It receives a callback, which can be async.
