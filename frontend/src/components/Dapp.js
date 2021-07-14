@@ -99,7 +99,7 @@ export class Dapp extends React.Component {
             <p>
               Welcome <b>{this.state.selectedAddress}</b>, you have{" "}
               <b>
-                {(this.state.balance / 10**18).toString()} {this.state.tokenData.symbol}
+                {ethers.utils.formatEther(ethers.BigNumber.from(this.state.balance))} {this.state.tokenData.symbol}
               </b>
               .
             </p>
@@ -294,7 +294,7 @@ export class Dapp extends React.Component {
 
       // We send the transaction, and save its hash in the Dapp's state. This
       // way we can indicate that we are waiting for it to be mined.
-      const tx = await this._token.transfer(to, (amount * 10**18).toString());
+      const tx = await this._token.transfer(to, ethers.utils.parseUnits(amount, 18));
       this.setState({ txBeingSent: tx.hash });
 
       // We use .wait() to wait for the transaction to be mined. This method

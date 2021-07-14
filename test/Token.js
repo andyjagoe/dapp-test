@@ -40,7 +40,8 @@ describe("Token contract", function () {
     // To deploy our contract, we just have to call Token.deploy() and await
     // for it to be deployed(), which happens onces its transaction has been
     // mined.
-    hardhatToken = await Token.deploy();
+    const initialSupply =  ethers.BigNumber.from("10").pow("18").mul("1000000000");
+    hardhatToken = await Token.deploy(initialSupply);
     await hardhatToken.deployed();
 
     // We can interact with the contract by calling `hardhatToken.method()`
@@ -53,15 +54,6 @@ describe("Token contract", function () {
     // tests. It receives the test name, and a callback function.
 
     // If the callback function is async, Mocha will `await` it.
-    it("Should set the right owner", async function () {
-      // Expect receives a value, and wraps it in an assertion objet. These
-      // objects have a lot of utility methods to assert values.
-
-      // This test expects the owner variable stored in the contract to be equal
-      // to our Signer's owner.
-      expect(await hardhatToken.owner()).to.equal(owner.address);
-    });
-
     it("Should assign the total supply of tokens to the owner", async function () {
       const ownerBalance = await hardhatToken.balanceOf(owner.address);
       expect(await hardhatToken.totalSupply()).to.equal(ownerBalance);
@@ -71,19 +63,20 @@ describe("Token contract", function () {
   describe("Transactions", function () {
     it("Should transfer tokens between accounts", async function () {
       // Transfer 50 tokens from owner to addr1
-      await hardhatToken.transfer(addr1.address, 50);
+      const transferAmount = ethers.BigNumber.from("10").pow("18").mul("50");
+      await hardhatToken.transfer(addr1.address, transferAmount);
       const addr1Balance = await hardhatToken.balanceOf(
         addr1.address
       );
-      expect(addr1Balance).to.equal(50);
+      expect(addr1Balance).to.equal(transferAmount);
 
       // Transfer 50 tokens from addr1 to addr2
       // We use .connect(signer) to send a transaction from another account
-      await hardhatToken.connect(addr1).transfer(addr2.address, 50);
+      await hardhatToken.connect(addr1).transfer(addr2.address, transferAmount);
       const addr2Balance = await hardhatToken.balanceOf(
         addr2.address
       );
-      expect(addr2Balance).to.equal(50);
+      expect(addr2Balance).to.equal(transferAmount);
     });
 
     it("Should fail if sender doesn’t have enough tokens", async function () {
@@ -94,8 +87,8 @@ describe("Token contract", function () {
       // Try to send 1 token from addr1 (0 tokens) to owner (1000 tokens).
       // `require` will evaluate false and revert the transaction.
       await expect(
-        hardhatToken.connect(addr1).transfer(owner.address, 1)
-      ).to.be.revertedWith("Not enough tokens");
+        hardhatToken.connect(addr1).transfer(owner.address, ethers.BigNumber.from("10").pow("18").mul("1"))
+      ).to.be.revertedWith("ERC20: transfer amount exceeds balance");
 
       // Owner balance shouldn't have changed.
       expect(await hardhatToken.balanceOf(owner.address)).to.equal(
@@ -109,26 +102,26 @@ describe("Token contract", function () {
       );
 
       // Transfer 100 tokens from owner to addr1.
-      await hardhatToken.transfer(addr1.address, 100);
+      await hardhatToken.transfer(addr1.address, ethers.BigNumber.from("10").pow("18").mul("100"));
 
       // Transfer another 50 tokens from owner to addr2.
-      await hardhatToken.transfer(addr2.address, 50);
+      await hardhatToken.transfer(addr2.address, ethers.BigNumber.from("10").pow("18").mul("50"));
 
       // Check balances.
       const finalOwnerBalance = await hardhatToken.balanceOf(
         owner.address
       );
-      expect(finalOwnerBalance).to.equal(initialOwnerBalance - 150);
+      expect(finalOwnerBalance).to.equal(ethers.BigNumber.from(initialOwnerBalance).sub(ethers.BigNumber.from("10").pow("18").mul("150")));
 
       const addr1Balance = await hardhatToken.balanceOf(
         addr1.address
       );
-      expect(addr1Balance).to.equal(100);
+      expect(addr1Balance).to.equal(ethers.BigNumber.from("10").pow("18").mul("100"));
 
       const addr2Balance = await hardhatToken.balanceOf(
         addr2.address
       );
-      expect(addr2Balance).to.equal(50);
+      expect(addr2Balance).to.equal(ethers.BigNumber.from("10").pow("18").mul("50"));
     });
   });
 });

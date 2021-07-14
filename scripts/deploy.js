@@ -10,7 +10,7 @@ async function main() {
     );
   }
 
-  // ethers is avaialble in the global scope
+  // ethers is available in the global scope
   const [deployer] = await ethers.getSigners();
   console.log(
     "Deploying the contracts with the account:",
@@ -20,7 +20,8 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
   const Token = await ethers.getContractFactory("Token");
-  const token = await Token.deploy("10000000000000000000000");
+  const initialSupply =  ethers.BigNumber.from("10").pow("18").mul("1000000000");
+  const token = await Token.deploy(initialSupply);
   await token.deployed();
 
   console.log("Token address:", token.address);

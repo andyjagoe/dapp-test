@@ -24,7 +24,7 @@ export function Transfer({ transferTokens, tokenSymbol }) {
           <input
             className="form-control"
             type="number"
-            step="1"
+            step="0.0000000000000001"
             name="amount"
             placeholder="1"
             required
