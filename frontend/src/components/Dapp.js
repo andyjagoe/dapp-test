@@ -99,7 +99,7 @@ export class Dapp extends React.Component {
             <p>
               Welcome <b>{this.state.selectedAddress}</b>, you have{" "}
               <b>
-                {ethers.utils.formatEther(ethers.BigNumber.from(this.state.balance))} {this.state.tokenData.symbol}
+                {ethers.utils.formatUnits(ethers.BigNumber.from(this.state.balance), 18)} {this.state.tokenData.symbol}
               </b>
               .
             </p>
