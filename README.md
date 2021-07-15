@@ -71,7 +71,7 @@ Your environment will have everything you need to build a Dapp powered by Hardha
 - [solidity-coverage](https://hardhat.org/plugins/solidity-coverage.html): Solidity coverage report.
 - [Travis CI](https://www.travis-ci.com/): Continuous integration service free for open source projects.
 - [Coveralls](https://coveralls.io/v): Web service to track coverage over time.
-- [[hardhat-gas-reporter](https://hardhat.org/plugins/hardhat-gas-reporter.html): eth-gas-reporter plugin to estimate function and deployment gas costs.
+- [hardhat-gas-reporter](https://hardhat.org/plugins/hardhat-gas-reporter.html): eth-gas-reporter plugin to estimate function and deployment gas costs.
 - [A sample frontend/Dapp](./frontend): A Dapp which uses [Create React App](https://github.com/facebook/create-react-app).
 
 ## Troubleshooting
