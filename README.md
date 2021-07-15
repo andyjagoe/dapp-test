@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/andyjagoe/hardhat-dapp.svg?token=Uy6FPYeyZ1PSDrsp6VVq&branch=main)](https://travis-ci.com/andyjagoe/hardhat-dapp)
+
 # Hardhat Hackathon Boilerplate
 
 This repository contains a sample project that you can use as the starting point
