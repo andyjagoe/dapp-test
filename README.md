@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/andyjagoe/hardhat-dapp.svg?token=Uy6FPYeyZ1PSDrsp6VVq&branch=main)](https://travis-ci.com/andyjagoe/hardhat-dapp)
+[![Build Status](https://travis-ci.com/andyjagoe/hardhat-dapp.svg?token=Uy6FPYeyZ1PSDrsp6VVq&branch=main)](https://travis-ci.com/andyjagoe/hardhat-dapp) [![Coverage Status](https://coveralls.io/repos/github/andyjagoe/hardhat-dapp/badge.svg?branch=main)](https://coveralls.io/github/andyjagoe/hardhat-dapp?branch=main)
 
 # Hardhat Hackathon Boilerplate
 
