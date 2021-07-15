@@ -1,4 +1,5 @@
 import "@nomiclabs/hardhat-waffle";
+import "solidity-coverage";
 
 import { HardhatUserConfig } from "hardhat/config";
 
