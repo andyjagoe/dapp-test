@@ -12,8 +12,8 @@ script:
   - npm run test
   - npm run coverage
 
-cache: npm
+cache: npm  
 
 branches:
   only:
-    - master
+    - main
