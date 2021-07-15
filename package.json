@@ -6,7 +6,7 @@
     "test": "test"
   },
   "scripts": {
-    "coverage": "hardhat coverage",
+    "coverage": "hardhat coverage && cat coverage/lcov.info | coveralls",
     "test": "hardhat test"
   },
   "repository": {
@@ -32,6 +32,7 @@
     "@types/mocha": "^8.2.3",
     "@types/node": "^16.3.2",
     "chai": "^4.3.4",
+    "coveralls": "^3.1.1",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.0.0",
     "hardhat": "^2.4.3",
